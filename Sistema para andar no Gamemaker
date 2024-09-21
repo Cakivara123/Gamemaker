@@ -1,0 +1,50 @@
+//Create
+spd = 5;
+hspd = 0;
+vspd = 0;
+grv = 0.2;
+
+//Step
+#region control
+right = keyboard_check(ord("D"))
+left = keyboard_check(ord("A"))
+jump = keyboard_check(vk_space)
+nada = keyboard_check(vk_nokey)
+#endregion
+
+
+#region Movimento e jump
+var move = right - left
+
+hspd = move * spd;
+vspd = vspd + grv;
+
+
+if (hspd != 0) image_xscale = sign(hspd);
+
+if place_meeting(x+hspd,y,Chao)
+{
+while(!place_meeting(x+sign(hspd),y,Chao))
+{
+x = x + sign(hspd)
+}
+hspd = 0;
+}
+x = x + hspd;
+
+
+if place_meeting(x,y+vspd,Chao)
+{
+while(!place_meeting(x,y+sign(vspd),Chao))
+{
+
+y = y + sign(vspd)
+}
+vspd = 0;
+}
+y = y + vspd;
+if place_meeting(x,y+1,Chao) and jump
+{
+ vspd -=8
+}
+#endregion
